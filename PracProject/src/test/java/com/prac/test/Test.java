@@ -15,6 +15,7 @@ public class Test {
         ArrayList<Row> rows = worbook.getRows(worbook.getSheet(worbook.getWorkBook(file), 0));
         for (Row row : rows) {
             System.out.println(worbook.getCells(row));
+            System.out.println(worbook.getCells(row));
         }
     }
 
