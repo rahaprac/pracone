@@ -1,6 +1,5 @@
 package com.prac.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,9 +16,8 @@ public class ExcelUtils {
 
 
 
-    public XSSFWorkbook getWorkBook(File excelPath) {
+    public XSSFWorkbook getWorkBook(FileInputStream fis) {
         try {
-            FileInputStream fis = new FileInputStream(excelPath);
             return new XSSFWorkbook(fis);
         } catch (FileNotFoundException e) {
             System.out.println("Please enter valid file path");
@@ -57,6 +55,23 @@ public class ExcelUtils {
         return cellList;
     }
 
+    public XSSFSheet createSheet(XSSFWorkbook book, String sheetName) {
+        XSSFSheet sheet = book.createSheet();
+        book.setSheetName(book.getSheetIndex(sheet.getSheetName()), sheetName);
+        return sheet;
+    }
 
+    public Row createRow(XSSFSheet sheet, int num) {
+        return sheet.createRow(num);
+
+    }
+
+    public Cell createcell(Row row) {
+        int cno = row.getLastCellNum();
+        if (cno < 0)
+            return row.createCell(++cno);
+        else
+            return row.createCell(cno++);
+    }
 
 }
